@@ -113,15 +113,16 @@ def execute_sql(table_quick, table_tx, table_block):
     db_is_new = not os.path.exists(db_name)
 
     # connect to the database
-    conn = sq3.connect(db_name) # or use :memory: to put it in RAM
+    # or use :memory: to put it in RAM
+    conn = sq3.connect(db_name)
     cur = conn.cursor()
     
     if db_is_new:
         print('Creating a new DB.')
         create_database(cur)
         create_index(cur)
-        update_database(cur,table_quick, table_tx, table_block)
+        update_database(cur, table_quick, table_tx, table_block)
     else:
-        update_database(cur,table_quick, table_tx, table_block)
+        update_database(cur, table_quick, table_tx, table_block)
     conn.commit()
     conn.close()
