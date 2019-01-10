@@ -15,14 +15,14 @@ import time
 web3 = Web3(Web3.IPCProvider('/data/blockchain/geth.ipc'))
 
 # load a block.
-Nblocks = 10000
+Nblocks = 7040000
 output_every = 2
 start_time = time.time()
 try:
     with open('lastblock.txt', 'r') as f:
         start = int(f.read())+1
 except FileNotFoundError:
-    start = 2000000
+    start = 0
 
 # define tables that will go to the SQLite database
 table_quick = []
