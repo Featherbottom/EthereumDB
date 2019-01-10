@@ -12,7 +12,7 @@ import time
 #web3 = Web3(Web3.HTTPProvider("https://mainnet.infura.io/your-personal-number"))
 
 # 2. or connection via local node 
-#web3 = Web3(Web3.IPCProvider('/your-path-to/geth.ipc'))
+web3 = Web3(Web3.IPCProvider('/your-path-to/geth.ipc'))
 
 # load a block.
 Nblocks = 10000
@@ -33,18 +33,18 @@ count = 0
 #loop over all blocks
 for block in range(start, start+Nblocks):
     
-    block_table, block_data = order_table_block(block,web3)
+    block_table, block_data = order_table_block(block, web3)
     #list of block data that will go to the DB
     table_block.append(block_table)
 
     #all transactions on the block
     for hashh in block_data['transactions']:
         #print(web3.toHex(hashh))       
-        quick_table, tx_data = order_table_quick(hashh,block, web3)
+        quick_table, tx_data = order_table_quick(hashh, block, web3)
         table_quick.append(quick_table)
         
         #list of tx data that will go to the DB
-        TX_table = order_table_tx(tx_data,hashh, web3)
+        TX_table = order_table_tx(tx_data, hashh, web3)
         table_tx.append(TX_table)
     count = count + 1
     #print(count)
